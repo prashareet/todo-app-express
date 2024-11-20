@@ -27,11 +27,15 @@ app.post("/todos", function(req,res){
 
 
 })
-// app.get('/', function (req, res) {
-//   res.send('Hello World')
-// })
+// Now we have to use the GET method for another test, to check if all the todos are getting added to
+// the todos[] array: 
+
+app.get("/todos", function (req, res){
+    res.json(todos) //Should respond with all the todos
+})
 
 app.listen(3000, () => {
     console.log("Server running at http://localhost:3000");
 });
 
+// The code is correct and just now tested with Postman!
