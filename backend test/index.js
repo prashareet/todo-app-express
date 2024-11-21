@@ -45,21 +45,24 @@ app.get("/todos", function (req, res){
 
 app.delete("/todos/:id", function(req,res){
     //Very important concept is params.
-    const {id} = req.params.id; //Extracting the id from route parameters.
+    const {id} = req.params; //Extracting the id from route parameters.
     const todoId = parseInt(id,10); // Converting the string to integer
     const index = todos.findIndex((todo) => todo.id ===todoId); //locating the index of the given id todo
     //If index not found, return error
     if(index===-1){
         // return res.status(400).json("Error : Todo not found"); - Mistake syntax
-        return res.status(404),json({error : "Todo not found"}); //Correct syntax for returning error
+        return res.status(404).json({"error" : "Todo not found"}); //Correct syntax for returning error
     }
 
     //Remove the todo from the array:
     todos.splice(index,1);
-    return res.status(200).json({message : "Todo with id:" + index + " deleted successfully"});
+    return res.status(200).json({"message" : "Todo with id:" + index + " deleted successfully"});
 })
 
+// After my trial code i am getting an error that json is not defined. why. - Syntactical error
 
+// Another error i am getting is "error" : :"Todo not found.", 
+// At least i am getting a response . which means something is wrong with the inside logic of function
 
 
 app.listen(3000, () => {
