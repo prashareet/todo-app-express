@@ -77,7 +77,9 @@ app.put("/todos/:id", function (req,res){
     const {id} = req.params;
     const {title} = req.body; //Note : This should be the updated title recieved from the frontend.
 
-    const todoId = id;
+
+    const todoId = parseInt(id,10);
+
     const todo = todos.find((todo) => todoId===todo.id); //Locate the todo element which has the correct id
 
     if(!todo){
