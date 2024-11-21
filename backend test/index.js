@@ -63,6 +63,33 @@ app.delete("/todos/:id", function(req,res){
 
 // Another error i am getting is "error" : :"Todo not found.", 
 // At least i am getting a response . which means something is wrong with the inside logic of function
+// Answer i used const {id} = req.params.id, syntactical error and a bit logical, 
+// const id = req.params.id or const {id} = req.params is correct.
+
+// After code is trial and tested, fixing all the errors, delete functionality is working!
+
+
+/*
+    EDIT FUNCTIONALITY - UPDATE, I GUESS WE HAVE TO USE THE PUT METHOD. 
+    I have understood the workflow and how to go about it , below is the trial code:
+*/
+app.put("/todos/:id", function (req,res){
+    const {id} = req.params;
+    const {title} = req.body; //Note : This should be the updated title recieved from the frontend.
+
+    const todoId = id;
+    const todo = todos.find((todo) => todoId===todo.id); //Locate the todo element which has the correct id
+
+    if(!todo){
+        //If todo is not present return error message
+        return res.status(404).json({"error" : "Todo not found"});
+    }
+
+    todo.title = title;//Update the title of the todo
+    
+    return res.status(200).json(todo) // return the updated todo.
+    
+})
 
 
 app.listen(3000, () => {
